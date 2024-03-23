@@ -1,8 +1,8 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <div class="d-flex align-items-center justify-content-between mb-5">
-        <h3 class="text-dark fw-semibold">Trsansaksi</h3>
-        <a wire:navigate href="{{ route('admin.transaksi.buat') }}" class="btn btn-primary">Tambah Transaksi Baru</a>
+        <h3 class="text-dark fw-semibold">Transaksi</h3>
+        <a wire:navigate href="{{ route('staff.transaksi.buat') }}" class="btn btn-primary">Tambah Transaksi Baru</a>
     </div>
 
     @if (session('status'))

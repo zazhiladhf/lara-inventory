@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Staff;
 
 use App\Models\Product;
 use App\Models\Transaction;
-use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -12,22 +11,21 @@ use Livewire\Component;
 class Dashboard extends Component
 {
 
-    #[Layout('layouts.admin', ['title' => 'Dashboard'])]
+    #[Layout('layouts.admin')]
     public function render()
     {
 
         $product_total = Product::count();
         $product_almost_out_stock = Product::where('stock', '<', 10)->count();
         $product_out_stock = Product::where('stock', 0)->count();
-        $user_total = User::count();
         $product_sold = Transaction::whereMonth('date', Carbon::now()->month)->whereYear('date', Carbon::now()->year)->sum('quantity');
         $income = Transaction::whereMonth('date', Carbon::now()->month)->whereYear('date', Carbon::now()->year)->sum('total');
 
-        return view('livewire.admin.dashboard', [
+
+        return view('livewire.staff.dashboard', [
             'product_total' => $product_total,
             'product_almost_out_stock' => $product_almost_out_stock,
             'product_out_stock' => $product_out_stock,
-            'user_total' => $user_total,
             'product_sold' => $product_sold,
             'income' => $income
         ]);

@@ -7,9 +7,12 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Product\ProductCreate;
 use App\Livewire\Admin\Product\ProductEdit;
 use App\Livewire\Admin\Product\ProductIndex;
-use App\Livewire\Admin\Transaction\TransactionCreate;
-use App\Livewire\Admin\Transaction\TransactionIndex;
-use App\Models\Product;
+use App\Livewire\Admin\Staff\StaffCreate;
+use App\Livewire\Admin\Staff\StaffEdit;
+use App\Livewire\Admin\Staff\StaffIndex;
+use App\Livewire\Staff\Dashboard as StaffDashboard;
+use App\Livewire\Staff\Transaction\TransactionCreate as TransactionTransactionCreate;
+use App\Livewire\Staff\Transaction\TransactionIndex as TransactionTransactionIndex;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,14 +27,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', StaffDashboard::class)->middleware(['staff', 'auth'])->name('staff.dashboard');
+Route::get('transaksi', TransactionTransactionIndex::class)->middleware(['staff', 'auth'])->name('staff.transaksi');
+Route::get('transaksi/buat', TransactionTransactionCreate::class)->middleware(['staff', 'auth'])->name('staff.transaksi.buat');
 
 Auth::routes(['register' => false]);
 
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['admin', 'auth'])->group(function () {
     Route::get('/', Dashboard::class)->name('admin.dashboard');
 
     Route::get('kategori', CategoryIndex::class)->name('admin.kategori');
@@ -42,6 +45,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('produk/buat', ProductCreate::class)->name('admin.produk.buat');
     Route::get('produk/edit/{id}', ProductEdit::class)->name('admin.produk.edit');
 
-    Route::get('transaksi', TransactionIndex::class)->name('admin.transaksi');
-    Route::get('transaksi/buat', TransactionCreate::class)->name('admin.transaksi.buat');
+    Route::get('staff', StaffIndex::class)->name('admin.staff');
+    Route::get('staff/buat', StaffCreate::class)->name('admin.staff.buat');
+    Route::get('staff/edit/{id}', StaffEdit::class)->name('admin.staff.edit');
 });

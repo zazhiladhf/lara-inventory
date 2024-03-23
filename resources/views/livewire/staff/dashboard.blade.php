@@ -57,16 +57,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <span class="icon mb-4"><i class='bx bx-user fs-2'></i></span>
-                    <h6 class="fs-7 text-uppercase text-secondary fw-semibold mb-2">
-                        Total User Aplikasi
-                    </h6>
-                    <h4 class="text-uppercase text-dark fw-semibold">{{ number_format($user_total) }}</h4>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
